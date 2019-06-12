@@ -3,14 +3,12 @@
 #include "Map.h"
 #include "Util.h"
 
-#define LEFT	75
-#define RIGHT	77
-#define UP		72
-#define DOWN	80
-
 int main()
 {
 	Engine* engine = new Engine();
+	Player* player = new Player();
+	Map* map = new Map();
+	engine->Init(player, map);
 	engine->Run();
 
 	delete engine;
