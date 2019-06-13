@@ -9,6 +9,7 @@ int main()
 	Player* player = new Player();
 	Map* map = new Map();
 	engine->Init(player, map);
+	
 	engine->Run();
 
 	delete engine;
