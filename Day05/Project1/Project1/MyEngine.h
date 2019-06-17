@@ -13,5 +13,6 @@ public:
 protected:
 	virtual void Input() override;
 	virtual void Tick() override;
+	virtual void Render() override;
 };
 

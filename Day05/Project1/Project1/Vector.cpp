@@ -2,7 +2,7 @@
 
 
 
-Vector::Vector()
+Vector::Vector() : X(0), Y(0)
 {
 }
 

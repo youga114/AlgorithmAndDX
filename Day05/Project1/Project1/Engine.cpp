@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <conio.h>
 
+int Engine::CurrentKeyCode = 0;
+
 Engine::Engine()
 {
 	Init();
@@ -39,7 +41,7 @@ void Engine::Input()
 
 void Engine::Tick()
 {
-	switch (CurrentKeyCode)
+	switch (Engine::CurrentKeyCode)
 	{
 		case 'q':
 		case 'Q':
@@ -47,7 +49,7 @@ void Engine::Tick()
 			break;
 	}
 
-	CurrentKeyCode = 0;
+	Engine::CurrentKeyCode = 0;
 }
 
 void Engine::Render()

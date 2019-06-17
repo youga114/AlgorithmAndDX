@@ -34,3 +34,12 @@ void Map::Draw()
 		printf("\n");
 	}
 }
+
+void Map::Tick()
+{
+}
+
+void Map::Render()
+{
+
+}

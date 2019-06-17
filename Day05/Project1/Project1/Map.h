@@ -1,5 +1,7 @@
 #pragma once
-class Map
+#include "Actor.h"
+
+class Map : public Actor
 {
 public:
 	Map();
@@ -14,15 +16,24 @@ public:
 
 	int Data[10][10] = {
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		{1, 2, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 2, 0, 0, 1, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 9, 1},
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 	};
+
+	virtual void Tick() override;
+	virtual void Render() override;
+
+	class Vector FindPlayerPosition();
+	class Vector FindMonsterPosition();
+
+private:
+	char GetMapTile(int Type);
 };
 

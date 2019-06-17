@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{5B6E4785-83DD-49A3-9837-2514EA2F71F5}</ProjectGuid>
+    <ProjectGuid>{F11E0897-C4DE-437C-9977-A45BB6C6F5FA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Project1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
@@ -139,27 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="Character.cpp" />
-    <ClCompile Include="Engine.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="Monster.cpp" />
-    <ClCompile Include="MyEngine.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Util.cpp" />
-    <ClCompile Include="Vector.cpp" />
+    <ClCompile Include="MyVector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h" />
-    <ClInclude Include="Character.h" />
-    <ClInclude Include="Engine.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="Monster.h" />
-    <ClInclude Include="MyEngine.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Util.h" />
-    <ClInclude Include="Vector.h" />
+    <ClInclude Include="MyVector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
