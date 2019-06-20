@@ -11,9 +11,13 @@ int main()
 		l.Insert(i);
 	}
 
-	for (Node* CurrentPosition = l.Head->Next; CurrentPosition != l.Tail; CurrentPosition = CurrentPosition->Next)
+	l.Insert(20, 3);
+	l.Insert(30, 20);
+	l.Insert(40, 9);
+
+	for (LList::Iterator CurrentPosition = l.Begin(); CurrentPosition != l.End(); ++CurrentPosition)
 	{
-		cout << CurrentPosition->Value << endl;
+		cout << (*CurrentPosition)->Value << endl;
 	}
 
 	return 0;
