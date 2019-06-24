@@ -115,7 +115,24 @@ public:
 		Iterator Return = Iterator((*Where)->Next);
 		delete (*Where);
 
+		Size--;
 		return Return;
+	}
+
+	Iterator Erase(ReverseIterator Where)
+	{
+		(*Where)->Prev->Next = (*Where)->Next;
+		(*Where)->Next->Prev = (*Where)->Prev;
+		Iterator Return = Iterator((*Where)->Next);
+		delete (*Where);
+
+		Size--;
+		return Return;
+	}
+
+	unsigned int GetSize()
+	{
+		return Size;
 	}
 
 protected:
@@ -123,6 +140,8 @@ protected:
 	Node<T>* Head;
 
 	Node<T>* MakeNode(T NewValue);
+
+	unsigned int Size;
 };
 
 template<typename T>
@@ -132,6 +151,7 @@ LList<T>::LList()
 	Tail = new Node<T>();
 	Head->Next = Tail;
 	Tail->Prev = Head;
+	Size = 0;
 }
 
 
@@ -151,6 +171,8 @@ void LList<T>::PushBack(T NewValue)
 		Tail->Prev = NewNode;
 		NewNode->Next = Tail;
 		NewNode->Prev->Next = NewNode;
+
+		Size++;
 	}
 }
 
@@ -165,6 +187,8 @@ void LList<T>::PushFront(T NewValue)
 		NewNode->Next = Head->Next;
 		NewNode->Next->Prev = NewNode;
 		Head->Next = NewNode;
+
+		Size++;
 	}
 }
 
@@ -180,6 +204,8 @@ void LList<T>::InsertAfter(LList<T>::Iterator Where, T NewValue)
 		NewNode->Prev = (*Where);
 		(*Where)->Next = NewNode;
 		NewNode->Next->Prev = NewNode;
+
+		Size++;
 	}
 }
 
@@ -195,6 +221,8 @@ void LList<T>::InsertBefore(LList<T>::Iterator Where, T NewValue)
 		NewNode->Prev = (*Where)->Prev;
 		(*Where)->Prev = NewNode;
 		NewNode->Prev->Next = NewNode;
+
+		Size++;
 	}
 }
 
