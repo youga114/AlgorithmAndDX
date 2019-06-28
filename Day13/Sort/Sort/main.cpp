@@ -46,7 +46,7 @@ bool cmp2(int a, int b)
 	return a < b;
 }
 
-int partition(int* Data, int begin, int end)
+int partition(int* Data, int begin, int end, bool(*fp)(int, int))
 {
 	int pivot = Data[end];
 	int left = begin;
@@ -54,11 +54,11 @@ int partition(int* Data, int begin, int end)
 	
 	while (1)
 	{
-		while (Data[left] < pivot)
+		while (fp(Data[left], pivot))
 		{
 			left++;
 		}
-		while (Data[right] > pivot)
+		while (fp(pivot, Data[right]))
 		{
 			right--;
 		}
@@ -75,13 +75,13 @@ int partition(int* Data, int begin, int end)
 	return left;
 }
 
-void QuickSort(int* Data, int begin, int end)
+void QuickSort(int* Data, int begin, int end, bool(*fp)(int, int))
 {
 	if (begin < end)
 	{
-		int pivot = partition(Data, begin, end);
-		QuickSort(Data, begin, pivot - 1);
-		QuickSort(Data, pivot + 1, end);
+		int pivot = partition(Data, begin, end, fp);
+		QuickSort(Data, begin, pivot - 1, fp);
+		QuickSort(Data, pivot + 1, end, fp);
 	}
 }
 
@@ -89,7 +89,7 @@ int main()
 {
 	int Data[10] = { 10,2,12,15,16,20,49,60,3,6 };
 
-	QuickSort(Data, 0, 9);
+	QuickSort(Data, 0, 9, cmp2);
 
 	for (int i = 0; i < 10; ++i)
 	{
