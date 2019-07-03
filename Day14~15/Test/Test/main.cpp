@@ -109,7 +109,7 @@ int main()
 	int size = sX.size();
 	for (int i = 0; i < size; i++)
 	{
-		cout << "[" << sY.top() << ", " << sX.top() << "]" << endl;
+		cout << "[" << sX.top() << ", " << sY.top() << "]" << endl;
 		sX.pop();
 		sY.pop();
 	}
