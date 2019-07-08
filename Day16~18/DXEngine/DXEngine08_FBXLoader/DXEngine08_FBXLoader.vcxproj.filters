@@ -24,10 +24,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader\PS.fx">
+    <FxCompile Include="Shader\VS.fx">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\VS.fx">
+    <FxCompile Include="Shader\PS.fx">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>
