@@ -14,7 +14,7 @@ private:
 		PerSceneBuffer() { ZeroMemory(this, sizeof(this)); }
 
 		XMMATRIX viewProjection;
-		XMFLOAT3 worldLightPostion;
+		XMFLOAT3 worldLightPosition;
 		XMFLOAT3 worldCameraPosition;
 	};
 
@@ -36,6 +36,7 @@ private:
 private:
 
 	Material* material;
+	Material* material2;				// New
 	//VertexShader* vertexShader;
 	//PixelShader* pixelShader;
 
@@ -47,4 +48,5 @@ private:
 	XMVECTOR camerUpVector;			// 카메라 위 방향.
 
 	Mesh* mesh;
+	Mesh* mesh2;						// New
 };

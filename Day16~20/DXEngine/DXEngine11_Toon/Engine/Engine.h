@@ -13,7 +13,7 @@ private:
 		PerSceneBuffer() { ZeroMemory(this, sizeof(this)); }
 
 		XMMATRIX viewProjection;
-		XMFLOAT3 worldLightPostion;
+		XMFLOAT3 worldLightPosition;
 		XMFLOAT3 worldCameraPosition;
 	};
 

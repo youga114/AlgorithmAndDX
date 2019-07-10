@@ -150,13 +150,13 @@ void Mesh::RenderBuffers(ID3D11DeviceContext * deviceContext)
 
 void Mesh::Update(ID3D11DeviceContext * deviceContext)
 {
-	// 위치(회전, 스케일) 정보 업데이트.
-	// 현재 회전 값 가져와 Y 회전 값 더하기.
-	XMFLOAT3 rot = GetRotation();
-	rot.y += 1.5f;
+	//// 위치(회전, 스케일) 정보 업데이트.
+	//// 현재 회전 값 가져와 Y 회전 값 더하기.
+	//XMFLOAT3 rot = GetRotation();
+	//rot.y += 1.5f;
 
-	// 변경한 회전 값 설정하기.
-	SetRotation(rot.x, rot.y, rot.z);
+	//// 변경한 회전 값 설정하기.
+	//SetRotation(rot.x, rot.y, rot.z);
 
 	// 월드 행렬 업데이트하기.
 	matrixData.world = XMMatrixTranspose(GetWorldMatrix());

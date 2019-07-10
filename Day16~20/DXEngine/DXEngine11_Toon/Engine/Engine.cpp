@@ -140,7 +140,7 @@ bool Engine::InitializeTransformation()
 	// 버퍼에 담을 구조체 변수 설정.
 	PerSceneBuffer matrixData;
 	matrixData.viewProjection = XMMatrixTranspose(view*projection);
-	matrixData.worldLightPostion = XMFLOAT3(500.0f, 500.0f, -500.0f);
+	matrixData.worldLightPosition = XMFLOAT3(500.0f, 500.0f, -500.0f);
 	float x = XMVectorGetX(cameraPosition);
 	float y = XMVectorGetY(cameraPosition);
 	float z = XMVectorGetZ(cameraPosition);

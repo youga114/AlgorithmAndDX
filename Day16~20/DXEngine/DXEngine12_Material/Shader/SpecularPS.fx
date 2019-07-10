@@ -22,7 +22,7 @@ float4 main(ps_input input) : SV_TARGET
 	
 	// 음영처리 (디퓨즈).
 	float3 diffuse = saturate(input.diffuse);				//0~1사이로 자르는 함수 saturate()
-	//diffuse = diffuse * textureColor.rgb;
+	diffuse = diffuse * textureColor.rgb;
 
 	// 값 정리.
 	float3 reflection = normalize(input.reflection);
@@ -43,5 +43,5 @@ float4 main(ps_input input) : SV_TARGET
 	//float3 specularColor = float3(1.0f, 0.0f, 0.0f);
 	float3 finalColor = diffuse + specular;
 	
-	return float4(diffuse + ambient, 1.0f);
+	return float4(finalColor, 1.0f);
 }

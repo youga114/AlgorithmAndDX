@@ -17,7 +17,7 @@ Material::~Material()
 
 }
 
-bool Material::ComplieShaders(ID3D11Device * device)
+bool Material::CompileShaders(ID3D11Device * device)
 {
 	// 정점 셰이더 컴파일.
 	if (vertexShader->CompileShader(device) == false)

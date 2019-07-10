@@ -10,7 +10,7 @@ public:
 	Material(LPCTSTR shaderName);
 	~Material();
 
-	bool ComplieShaders(ID3D11Device* device);
+	bool CompileShaders(ID3D11Device* device);
 	bool CreateShaders(ID3D11Device* device);
 	void BindShaders(ID3D11DeviceContext* deviceContext);
 

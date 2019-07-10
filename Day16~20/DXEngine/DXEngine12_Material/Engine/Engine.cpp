@@ -8,9 +8,13 @@ Engine::Engine(HINSTANCE hinstance) : DXApp(hinstance)
 Engine::~Engine()
 {
 	Memory::SafeDelete(mesh);
+	Memory::SafeDelete(mesh2);
 
 	material->Release();
 	Memory::SafeDelete(material);
+
+	material2->Release();
+	Memory::SafeDelete(material2);
 
 	Memory::SafeRelease(constantBuffer);
 
@@ -44,8 +48,8 @@ bool Engine::Init()
 
 void Engine::Update()
 {
-	// 월드 행렬 바인딩.
-	mesh->Update(deviceContext);
+	//// 월드 행렬 바인딩.
+	//mesh->Update(deviceContext);
 
 	// 뷰/투영 행렬 바인딩.
 	deviceContext->VSSetConstantBuffers(1, 1, &constantBuffer);
@@ -61,6 +65,10 @@ void Engine::Render()
 	// 뎁스/스텐실 뷰 지우기.
 	deviceContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
+
+	// 월드 행렬 바인딩.
+	mesh->Update(deviceContext);
+
 	// 셰이더 바인딩.
 	//vertexShader->BindShader(deviceContext);
 	//pixelShader->BindShader(deviceContext);
@@ -75,77 +83,79 @@ void Engine::Render()
 	// 메시 버퍼 그리기.
 	mesh->RenderBuffers(deviceContext);
 
+
+	// 월드 행렬 바인딩.
+	mesh2->Update(deviceContext);
+
+	// 셰이더 바인딩.
+	//vertexShader->BindShader(deviceContext);
+	//pixelShader->BindShader(deviceContext);
+	material2->BindShaders(deviceContext);
+
+	// 텍스처/샘플러 스테이트 바인딩.
+	//pixelShader->BindTexture(deviceContext);
+	//pixelShader->BindSamplerState(deviceContext);
+	material2->BindTexture(deviceContext);
+	material2->BindSamplerState(deviceContext);
+
+	// 메시 버퍼 그리기.
+	mesh2->RenderBuffers(deviceContext);
+
+
+
 	// 백버퍼 <-> 프론트 버퍼 교환.
 	swapChain->Present(1, 0);
+
 }
 
 bool Engine::InitializeScene()
 {
-	//// 정점 셰이더 생성.
-	//vertexShader = new VertexShader(TEXT("Shader//ToonVS.fx"));
-	//// 정점 셰이더 컴파일.
-	//if (vertexShader->CompileShader(device) == false)
-	//	return false;
-
-	//// 정점 셰이더 객체 생성.
-	//if (vertexShader->CreateShader(device) == false)
-	//	return false;
-
-	//// 픽셀 셰이더 생성.
-	//pixelShader = new PixelShader(TEXT("Shader//ToonPS.fx"));
-
-	//// 픽셀 셰이더 컴파일.
-	//if (pixelShader->CompileShader(device) == false)
-	//	return false;
-
-	//// 픽셀 셰이더 객체 생성.
-	//if (pixelShader->CreateShader(device) == false)
-	//	return false;
-
-	//// 텍스처 로드.
-	//if (pixelShader->LoadTexture(
-	//	device,
-	//	TEXT("Resources/Textures/T_Chr_FPS_D.png"))
-	//	== false)
-	//{
-	//	return false;
-	//}
-
-	//// 샘플러 스테이트 생성.
-	//if (pixelShader->CreateSamplerState(device) == false)
-	//	return false;
-
 	// 머티리얼 객체 생성.
 	material = new Material(TEXT("Shader/Specular"));
+	material2 = new Material(TEXT("Shader/Specular"));
 
 	// 머티리얼 컴파일.
-	if (material->ComplieShaders(device) == false)
+	if (material->CompileShaders(device) == false)
+		return false;
+	if (material2->CompileShaders(device) == false)
 		return false;
 
 	// 각 셰이더 객체 생성,
 	if (material->CreateShaders(device) == false)
 		return false;
+	if (material2->CreateShaders(device) == false)
+		return false;
 
 	// 텍스처 관련 처리.
 	// 텍스처 추가.
 	material->AddTexture(TEXT("Resources/Textures/T_Chr_FPS_D.png"));
+	material2->AddTexture(TEXT("Resources/Textures/T_Chr_FPS_D.png"));
 
 	// 텍스처 로드
 	if (material->LoadTexture(device) == false)
+		return false;
+	if (material2->LoadTexture(device) == false)
 		return false;
 
 	// 샘플러 스테이트 생성.
 	if (material->CreateSamplerState(device) == false)
 		return false;
+	if (material2->CreateSamplerState(device) == false)
+		return false;
 
 	//// 메쉬 생성.
 	////mesh = new Mesh(0.0f, 0.0f, 0.0f);
-	mesh = new Mesh("Resources/Models/Sphere.FBX");
-	mesh->SetPosition(0.0f, 0.0f, 0.0f);
+	mesh = new Mesh("Resources/Models/HeroTPP.FBX");
+	mesh->SetPosition(-70.0f, -90.0f, 0.0f);
 	mesh->SetRotation(-90.0f, 180.0f, 0.0f);
+	mesh2 = new Mesh("Resources/Models/HeroTPP.FBX");
+	mesh2->SetPosition(70.0f, -90.0f, 0.0f);
+	mesh2->SetRotation(-90.0f, 180.0f, 0.0f);
 
 	// 초기화.
 	if (mesh->InitializeBuffers(device, material) == false)
+		return false;
+	if (mesh2->InitializeBuffers(device, material2) == false)
 		return false;
 
 	return true;
@@ -171,7 +181,7 @@ bool Engine::InitializeTransformation()
 	// 버퍼에 담을 구조체 변수 설정.
 	PerSceneBuffer matrixData;
 	matrixData.viewProjection = XMMatrixTranspose(view*projection);
-	matrixData.worldLightPostion = XMFLOAT3(500.0f, 500.0f, -500.0f);
+	matrixData.worldLightPosition = XMFLOAT3(500.0f, 500.0f, -500.0f);
 	float x = XMVectorGetX(cameraPosition);
 	float y = XMVectorGetY(cameraPosition);
 	float z = XMVectorGetZ(cameraPosition);
