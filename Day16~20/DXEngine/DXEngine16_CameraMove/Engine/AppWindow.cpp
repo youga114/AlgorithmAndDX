@@ -18,7 +18,7 @@ AppWindow::AppWindow(HINSTANCE hinstance)
 	this->hinstance = hinstance;
 	screenWidth = 1500;
 	screenHeight = 900;
-	applicationName = TEXT("Engine15 - Input");
+	applicationName = TEXT("Engine16 - CameraMove");
 	windowStyle = WS_OVERLAPPEDWINDOW;
 	app = this;
 }
